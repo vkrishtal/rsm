@@ -1,25 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace Api
 {
-    public class Program
+    /// <summary>
+    /// The application entry point class.
+    /// </summary>
+    public static class Program
     {
-        public static void Main(string[] args)
+        /// <summary>
+        /// The application entry point function.
+        /// </summary>
+        /// <param name="args">The input application arguments.</param>
+        public static void Main(String[] args)
         {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args) =>
+            // Create and run web server.
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+                   .UseStartup<Startup>()
+                   .Build()
+                   .Run();
+        }
     }
 }
