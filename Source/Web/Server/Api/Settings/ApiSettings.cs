@@ -15,7 +15,7 @@ namespace Api.Settings
         /// <summary>
         /// The API prefix in URL.
         /// </summary>
-        public String Prefix { get; set; }
+        public String Route { get; set; }
 
         /// <summary>
         /// The route to SignalR connection.
