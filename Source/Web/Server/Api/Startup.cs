@@ -58,7 +58,6 @@ namespace Api
         {
             Assert(services != null);
 
-
             services.AddMvc();
             services.AddSwaggerGen(ConfigureSwaggerGenerator);
             services.AddSignalR();
