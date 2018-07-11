@@ -13,6 +13,9 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using static System.Diagnostics.Debug;
 using Api.SignalR;
+using Core.Contracts.Services;
+using Core.Services;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Api
 {
@@ -25,6 +28,11 @@ namespace Api
         /// The name of section in appsettings.json.
         /// </summary>
         private const String API_SECTION_NAME = "Api";
+
+        /// <summary>
+        /// The CORS rule.
+        /// </summary>
+        private const String ALLOW_ALL_CORS = "AllowAll";
 
         /// <summary>
         /// API settings.
@@ -58,9 +66,12 @@ namespace Api
         {
             Assert(services != null);
 
+            services.AddCors(ConfigureCors);
             services.AddMvc();
             services.AddSwaggerGen(ConfigureSwaggerGenerator);
             services.AddSignalR();
+
+            services.AddSingleton<ISystemService, SystemService>();
         }
 
         /// <summary>
@@ -78,11 +89,27 @@ namespace Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(ALLOW_ALL_CORS);
             app.UseSwagger();
             app.UseSwaggerUI(ConfigureSwaggerUi);
             app.UseSignalR(ConfigureSignalR);
             app.UseRewriter(GetRules());
             app.UseMvc();
+        }
+
+        /// <summary>
+        /// Configures CORS.
+        /// </summary>
+        private void ConfigureCors(CorsOptions options)
+        {
+            Assert(options != null);
+
+            options.AddPolicy(ALLOW_ALL_CORS, p =>
+            {
+                p.AllowAnyOrigin()
+                 .AllowAnyHeader()
+                 .AllowAnyMethod();
+            });
         }
 
         /// <summary>

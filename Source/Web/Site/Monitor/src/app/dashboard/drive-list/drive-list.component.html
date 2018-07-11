@@ -1,0 +1,8 @@
+<mat-card>
+    <mat-list>
+      <h3 mat-subheader>Drives</h3>
+      <mat-list-item *ngFor="let drive of _drivers">
+        <app-drive-usage [drive]="drive"></app-drive-usage>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>

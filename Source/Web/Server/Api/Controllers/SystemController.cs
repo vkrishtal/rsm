@@ -7,24 +7,23 @@ namespace Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public sealed class RamController : Controller
+    public class SystemController : Controller
     {
         private readonly ISystemService _service;
 
-        public RamController(ISystemService service)
+        public SystemController(ISystemService service)
         {
             Assert(service != null);
 
             _service = service;
         }
 
-        // GET api/values
         [HttpGet]
-        public RamInfo Get()
+        public SystemInfo Get()
         {
             Assert(_service != null);
 
-            return _service.GetRamInfo();
+            return _service.GetSystemInfo();
         }
     }
 }

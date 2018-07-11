@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -15,9 +17,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatListModule } from '@angular/material/list';
 
 import { ProcessService } from './services/process/process.service';
 import { RamService } from './services/ram/ram.service';
+import { DriveService } from './services/drive/drive.service';
+import { DriveUsageComponent } from './drive-usage/drive-usage.component';
+import { DriveListComponent } from './drive-list/drive-list.component';
 
 @NgModule({
   imports: [
@@ -29,17 +36,24 @@ import { RamService } from './services/ram/ram.service';
     MatSortModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatInputModule
+    MatInputModule,
+    HttpModule,
+    HttpClientModule,
+    MatBadgeModule,
+    MatListModule
   ],
   declarations: [
     DashboardComponent,
     SystemInformationComponent,
     RamUsageComponent,
     CpuUsageComponent,
-    ProcListComponent],
+    ProcListComponent,
+    DriveUsageComponent,
+    DriveListComponent],
   providers: [
     ProcessService,
-    RamService
+    RamService,
+    DriveService
   ]
 })
 export class DashboardModule { }
