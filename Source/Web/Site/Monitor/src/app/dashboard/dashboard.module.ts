@@ -26,6 +26,8 @@ import { DriveService } from './services/drive/drive.service';
 import { DriveUsageComponent } from './drive-usage/drive-usage.component';
 import { DriveListComponent } from './drive-list/drive-list.component';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { DriveListComponent } from './drive-list/drive-list.component';
     HttpModule,
     HttpClientModule,
     MatBadgeModule,
-    MatListModule
+    MatListModule,
+    NgxChartsModule
   ],
   declarations: [
     DashboardComponent,
