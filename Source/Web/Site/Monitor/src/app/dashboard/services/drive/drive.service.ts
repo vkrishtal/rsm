@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Drive } from '../../models/drive';
 
 import { environment } from '../../../../environments/environment';
-import { inject } from '@angular/core/testing';
 
 @Injectable()
 export class DriveService {
@@ -14,7 +13,7 @@ export class DriveService {
         this._drives = _http.get<Drive[]>(`${environment.api}/drive`);
     }
 
-    public get Drives() {
+    public get drives() {
         return this._drives;
     }
 }

@@ -25,6 +25,7 @@ import { RamService } from './services/ram/ram.service';
 import { DriveService } from './services/drive/drive.service';
 import { DriveUsageComponent } from './drive-usage/drive-usage.component';
 import { DriveListComponent } from './drive-list/drive-list.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -43,7 +44,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     HttpClientModule,
     MatBadgeModule,
     MatListModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatProgressBarModule
   ],
   declarations: [
     DashboardComponent,
@@ -52,7 +54,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CpuUsageComponent,
     ProcListComponent,
     DriveUsageComponent,
-    DriveListComponent],
+    DriveListComponent
+  ],
   providers: [
     ProcessService,
     RamService,

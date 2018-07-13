@@ -17,7 +17,7 @@ export class DriveListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._subscription = this._service.Drives.subscribe(data => {
+    this._subscription = this._service.drives.subscribe(data => {
       this._drivers = data;
     });
   }

@@ -1,7 +1,6 @@
-<h1>{{drive.name}}</h1>
-<h1>{{drive.totalSpace}}</h1>
+<h1 class="column">{{drive.name}}</h1>
+<h1 class="column">{{drive.totalSpace}}</h1>
 
-<ngx-charts-line-chart 
-    [results]="lineChartMulti" 
-   > 
+<ngx-charts-line-chart class="column chart" [results]="lineChartMulti">
 </ngx-charts-line-chart>
+
