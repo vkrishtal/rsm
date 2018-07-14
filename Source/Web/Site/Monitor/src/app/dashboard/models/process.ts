@@ -3,4 +3,5 @@ export interface Process {
     name: string;
     status: string;
     user: string;
+    workingSet: number;
 }

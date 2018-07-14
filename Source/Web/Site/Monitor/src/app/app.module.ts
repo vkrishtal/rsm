@@ -6,6 +6,13 @@ import { AppComponent } from './app.component';
 import { NotFoundScreenComponent } from './not-found-screen/not-found-screen.component';
 
 import { AppRoutingModule } from './app.routing.module';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -15,9 +22,12 @@ import { AppRoutingModule } from './app.routing.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    NgZorroAntdModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

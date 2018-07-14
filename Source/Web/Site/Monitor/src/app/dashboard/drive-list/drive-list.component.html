@@ -1,8 +1,17 @@
-<mat-card>
-    <mat-list>
-      <h3 mat-subheader>Drives</h3>
-      <mat-list-item *ngFor="let drive of _drivers">
-        <app-drive-usage [drive]="drive"></app-drive-usage>
-      </mat-list-item>
-    </mat-list>
-  </mat-card>
+<nz-card style="width:500px;" nzTitle="Drives">
+    <nz-list [nzDataSource]="_drives" [nzItemLayout]="'horizontal'" [nzLoading]="loading" [nzRenderItem]="item" [nzLoadMore]="loadMore">
+        <ng-template #item let-item>
+            <nz-list-item>
+                <nz-list-item-meta [nzTitle]="nzTitle" nzDescription="{{formatBytes(item.usedSpace)}} \ {{formatBytes(item.totalSpace)}}">
+                    <ng-template #nzTitle>
+                        <strong>
+                            <i class="anticon anticon-hdd"></i>
+                            {{item.name}}
+                        </strong>
+                        <nz-progress [nzPercent]="usedPercent(item)" nzStatus="active"></nz-progress>
+                    </ng-template>
+                </nz-list-item-meta>
+            </nz-list-item>
+        </ng-template>
+    </nz-list>
+</nz-card>

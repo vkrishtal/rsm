@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using Core.Contracts.Models;
 using Core.Contracts.Services;
@@ -60,6 +61,40 @@ namespace Core.Services
 
             return new DriveInfo(drive.Name, drive.VolumeLabel,
                 drive.AvailableFreeSpace, drive.TotalSize);
+        }
+
+        public IReadOnlyList<ProcessInfo> GetProcesses()
+        {
+            return Process.GetProcesses().Select(process => new ProcessInfo
+            {
+                Pid = process.Id.ToString(),
+                Name = process.ProcessName,
+                Status = process.Responding ? "responding" : "stopped",
+                WorkingSet = process.WorkingSet64
+            })
+            .ToList()
+            .AsReadOnly();
+        }
+
+        public NetworkInfo GetNetworkInfo()
+        {
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                return null;
+            }
+
+            var info = new NetworkInfo();
+            NetworkInterface
+            .GetAllNetworkInterfaces()
+            .ToList()
+            .ForEach(net =>
+            {
+                var stats = net.GetIPv4Statistics();
+                info.Received += stats.BytesReceived;
+                info.Sent += stats.BytesSent;
+            });
+
+            return info;
         }
     }
 }

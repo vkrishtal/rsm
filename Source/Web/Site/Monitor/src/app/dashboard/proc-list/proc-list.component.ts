@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-
 import { Process } from '../models/process';
 import { interval } from 'rxjs';
 
@@ -13,30 +11,23 @@ import { ProcessService } from '../services/process/process.service';
 })
 export class ProcListComponent implements OnInit {
 
-  private columns: string[] = ['pid', 'name', 'status', 'user'];
-  private dataSource: MatTableDataSource<Process>;
-
-  @ViewChild(MatPaginator)
-  private paginator: MatPaginator;
-
-  @ViewChild(MatSort)
-  private sort: MatSort;
+  processes: Process[];
 
   constructor(private service: ProcessService) {
-
   }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource();
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.service.Processes.subscribe(p => {
+      this.processes = p.filter(pr => pr.workingSet > 0 && pr.name === 'chrome');
+    });
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  formatBytes(bytes, decimals): string {
+    if (bytes === 0) { return '0 Bytes'; }
+    const k = 1024;
+    const dm = decimals || 2;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 }

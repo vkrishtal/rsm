@@ -10,21 +10,16 @@ import { RamUsageComponent } from './ram-usage/ram-usage.component';
 import { CpuUsageComponent } from './cpu-usage/cpu-usage.component';
 import { ProcListComponent } from './proc-list/proc-list.component';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatInputModule } from '@angular/material/input';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatListModule } from '@angular/material/list';
-
 import { ProcessService } from './services/process/process.service';
 import { RamService } from './services/ram/ram.service';
 import { DriveService } from './services/drive/drive.service';
 import { DriveUsageComponent } from './drive-usage/drive-usage.component';
 import { DriveListComponent } from './drive-list/drive-list.component';
+
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+registerLocaleData(en);
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -32,18 +27,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MatButtonModule,
-    MatCardModule,
-    MatTableModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatPaginatorModule,
-    MatInputModule,
     HttpModule,
     HttpClientModule,
-    MatBadgeModule,
-    MatListModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NgZorroAntdModule
   ],
   declarations: [
     DashboardComponent,
@@ -56,7 +43,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   providers: [
     ProcessService,
     RamService,
-    DriveService
+    DriveService,
+    { provide: NZ_I18N, useValue: en_US }
   ]
 })
 export class DashboardModule { }

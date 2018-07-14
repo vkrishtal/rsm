@@ -1,4 +1,5 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Contracts.Models;
+using Core.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -12,6 +13,12 @@ namespace Api.Controllers
         public NetController(ISystemService service)
         {
             _service = service;
+        }
+
+        [HttpGet]
+        public NetworkInfo Get()
+        {
+            return _service.GetNetworkInfo();
         }
     }
 }

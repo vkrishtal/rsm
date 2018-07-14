@@ -1,4 +1,6 @@
-﻿using Core.Contracts.Services;
+﻿using System.Collections.Generic;
+using Core.Contracts.Models;
+using Core.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -12,6 +14,12 @@ namespace Api.Controllers
         public ProcessController(ISystemService service)
         {
             _service = service;
+        }
+
+        [HttpGet]
+        public IEnumerable<ProcessInfo> Get()
+        {
+            return _service.GetProcesses();
         }
     }
 }

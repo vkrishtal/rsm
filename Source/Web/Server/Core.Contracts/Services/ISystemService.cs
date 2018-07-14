@@ -8,5 +8,7 @@ namespace Core.Contracts.Services
         SystemInfo GetSystemInfo();
         RamInfo GetRamInfo();
         IReadOnlyList<DriveInfo> GetDrivesInfo();
+        IReadOnlyList<ProcessInfo> GetProcesses();
+        NetworkInfo GetNetworkInfo();
     }
 }

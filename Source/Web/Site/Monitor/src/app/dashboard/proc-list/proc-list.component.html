@@ -1,40 +1,20 @@
-<mat-card>
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" autocomplete="off">
-  </mat-form-field>
-
-  <div>
-    <table mat-table [dataSource]="dataSource" matSort>
-
-      <!-- ID Column -->
-      <ng-container matColumnDef="pid">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row"> {{row.pid}} </td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-      </ng-container>
-
-      <!-- Progress Column -->
-      <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-          <td mat-cell *matCellDef="let row"> {{row.status}} </td>
-        </ng-container>
-
-      <!-- Color Column -->
-      <ng-container matColumnDef="user">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
-        <td mat-cell *matCellDef="let row"> {{row.user}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr mat-row *matRowDef="let row; columns: columns;">
-      </tr>
-    </table>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-  </div>
-</mat-card>
+<nz-card nzTitle="Processes" [nzExtra]="extraTemplate">
+    <nz-table #basicTable [nzData]="processes" nzPageSize="10" nzTotal="10">
+        <thead>
+            <tr>
+                <th>PID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Memory</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let process of processes">
+                <td>{{process.pid}}</td>
+                <td>{{process.name}}</td>
+                <td>{{process.status}}</td>
+                <td>{{formatBytes(process.workingSet, 1)}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</nz-card>
